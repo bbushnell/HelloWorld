@@ -20,8 +20,8 @@ echo "📁 Project directory: $DIR"
 # Compile all Java files in packages
 echo "🔨 Compiling Java source files..."
 
-# Find and compile all .java files in package directories
-JAVA_FILES=$(find "$DIR" -name "*.java" -path "*/hello/*" -o -path "*/world/*")
+# Find and compile all .java files in package directories  
+JAVA_FILES=$(find "$DIR" \( -path "*/hello/*" -o -path "*/world/*" \) -name "*.java")
 
 if [ -z "$JAVA_FILES" ]; then
     echo "❌ No Java source files found in hello/ or world/ packages"
