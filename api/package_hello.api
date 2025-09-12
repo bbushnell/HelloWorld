@@ -1,0 +1,49 @@
+# Package hello API
+*Professional greeting generation with time-aware functionality*
+*Generated for HelloWorld example project*
+
+## Core Classes
+
+<class HelloTool>
+*Primary greeting tool demonstrating professional Java patterns*
+*Supports customizable greetings with proper argument validation and error handling*
+*Usage: java hello.HelloTool [name] [options]*
+public class HelloTool
+
+#Methods
+*Main entry point for HelloTool*
+*Demonstrates proper argument parsing, assertions, and error handling*
+public static void main(String[] args)
+
+*Parses command line arguments and extracts the name parameter*
+private static String parseArguments(String[] args)
+
+*Prints usage information to stderr*
+private static void printUsage()
+</class HelloTool>
+
+<class HelloUtils>
+*Utility functions for greeting generation*
+*Demonstrates defensive programming with comprehensive input validation*
+public class HelloUtils
+
+#Methods
+*Generates a contextual greeting for the specified name*
+*Uses time-based greeting selection for natural interaction*
+public static String generateGreeting(String name)
+
+*Sanitizes a name for safe display*
+*Removes potentially problematic characters while preserving readability*
+private static String sanitizeName(String name)
+
+*Selects an appropriate greeting prefix based on current time*
+*Demonstrates time-aware functionality for natural interaction*
+private static String selectGreetingPrefix()
+
+*Validates that a name meets basic requirements for greeting generation*
+public static boolean isValidName(String name)
+</class HelloUtils>
+
+---
+*Package hello provides core greeting functionality with professional error handling*
+*All classes follow defensive programming principles with comprehensive assertions*

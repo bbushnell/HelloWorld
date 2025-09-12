@@ -1,0 +1,16 @@
+{
+    "description": "Basic HelloTool functionality test with default behavior",
+    "category": "basic_functionality",
+    "tool": "hello.sh",
+    "parameters": [],
+    "expected_result": "success",
+    "validation_rules": [
+        "contains_greeting",
+        "contains_world",
+        "proper_format",
+        "no_errors"
+    ],
+    "author": "HelloWorld Test Suite",
+    "created": "2025-09-12",
+    "tags": ["core", "greeting", "basic"]
+}

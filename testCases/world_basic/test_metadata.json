@@ -1,0 +1,18 @@
+{
+    "description": "Basic WorldTool functionality test with cross-package interaction",
+    "category": "basic_functionality", 
+    "tool": "world.sh",
+    "parameters": [],
+    "expected_result": "success",
+    "validation_rules": [
+        "contains_greeting",
+        "contains_population",
+        "contains_languages", 
+        "contains_continents",
+        "cross_package_interaction",
+        "no_errors"
+    ],
+    "author": "HelloWorld Test Suite",
+    "created": "2025-09-12",
+    "tags": ["core", "world", "cross-package", "basic"]
+}
