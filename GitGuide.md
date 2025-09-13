@@ -167,16 +167,50 @@ git reset --hard origin/main
 
 ## GitHub CLI Essentials
 
+### Cross-Platform Compatibility
+GitHub CLI (`gh`) works identically across:
+- **WSL/Bash** - Primary development environment
+- **PowerShell** - Windows development
+- **Command Prompt** - Legacy Windows support
+
+**Note:** If `gh` seems missing, it's installed but PATH might need updating.
+
 ### Working with Issues
+
+**When to Use GitHub Issues vs TodoWrite:**
+- **GitHub Issues:** Long-term planning, collaboration, communication with team
+- **TodoWrite:** Short-term task tracking, personal progress, immediate implementation
+- **Markdown files:** Documentation planning, persistent local notes
+
 ```bash
 # View issue
 gh issue view 123
 
-# Create issue
-gh issue create --title "Bug: X doesn't work" --body "Details..."
+# Create issue with proper detail
+gh issue create --title "Feature: Add comprehensive logging system" \
+                 --body "## Problem
+Current system lacks detailed logging for debugging.
 
-# List issues
-gh issue list --limit 10
+## Proposed Solution
+- Add configurable log levels (DEBUG, INFO, WARN, ERROR)
+- Implement file-based logging with rotation
+- Add structured logging for JSON output
+
+## Acceptance Criteria
+- [ ] Log levels configurable via command line
+- [ ] Files rotate at 10MB with 5 file limit
+- [ ] JSON format available for automated processing"
+
+# List issues by state
+gh issue list --state open --limit 20
+gh issue list --state closed --limit 10
+
+# Update issue
+gh issue edit 123 --title "Updated title"
+gh issue comment 123 --body "Status update: Implementation 50% complete"
+
+# Close issue
+gh issue close 123 --comment "Fixed in commit abc123"
 ```
 
 ### Working with Pull Requests
@@ -199,12 +233,21 @@ gh pr merge 123 --squash
 # Clone
 gh repo clone user/repo
 
-# Create
-gh repo create my-project --public --description "What it does"
+# Create repo (DEFAULT: PRIVATE unless specified)
+gh repo create my-project --private --description "What it does"
+gh repo create my-project --public --description "What it does"  # Only for bbtools/bbmap-website
 
 # View
 gh repo view user/repo
 ```
+
+**IMPORTANT REPOSITORY POLICIES:**
+- **Default: PRIVATE** - All new repositories should be private by default
+- **Public exceptions:** Only `bbtools` and `bbmap-website` should be public
+- **Issue tracking:**
+  - bbtools issues → tracked in `bbtools-issues` repository
+  - bbmap-website issues → tracked in `bbmap-website-issues` repository
+  - Never post issues on public repos directly
 
 ## Git Configuration Essentials
 
@@ -296,6 +339,61 @@ git push
 - GitHub is just a remote copy of your repository
 
 **When confused:** `git status` tells you everything you need to know.
+
+## Project Planning with GitHub Issues
+
+### Planning Workflow for Development
+```bash
+# Start new feature development
+gh issue create --title "Epic: Implement user authentication system"
+gh issue create --title "Task: Design user database schema"
+gh issue create --title "Task: Implement password hashing"
+gh issue create --title "Task: Create login/logout endpoints"
+
+# Link issues to commits
+git commit -m "Implement password hashing (fixes #123)"
+git commit -m "Add login endpoint (addresses #124)"
+
+# Track progress
+gh issue comment 123 --body "✅ Database schema complete
+🔄 Working on password validation
+⏳ Next: Integration tests"
+```
+
+### Issue Templates for Common Tasks
+```markdown
+<!-- Bug Report Template -->
+## Bug Description
+Brief description of the issue
+
+## Steps to Reproduce
+1. Step one
+2. Step two
+3. Error occurs
+
+## Expected Behavior
+What should happen
+
+## Actual Behavior
+What actually happens
+
+## Environment
+- OS: [Windows/Linux/macOS]
+- Java Version: [output of java -version]
+- Project Version: [commit hash or tag]
+
+<!-- Feature Request Template -->
+## Problem Statement
+What problem does this solve?
+
+## Proposed Solution
+How should we solve it?
+
+## Acceptance Criteria
+- [ ] Criterion 1
+- [ ] Criterion 2
+- [ ] Criterion 3
+```
 
 ---
 
