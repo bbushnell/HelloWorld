@@ -1,4 +1,4 @@
-Hi, World!
+Hello, World!
 World Information Summary:
 ========================
 
