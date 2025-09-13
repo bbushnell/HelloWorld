@@ -255,6 +255,7 @@ This repository includes complete project organization guides:
 - **ProjectGuide.md**: Universal scalable project structure
 - **ShellScriptGuide.md**: Professional shell script patterns
 - **FunctionalityGuide.md**: Systematic functionality investigation
+- **GitGuide.md**: Essential git commands for AI systems (because AIs constantly mess this up)
 
 ## 🎯 Success Criteria
 

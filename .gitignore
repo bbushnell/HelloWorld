@@ -14,13 +14,16 @@ out/
 .classpath
 .settings/
 
-# Package files
-*.jar
+# Package files (but NOT lib/ dependencies!)
 *.war
 *.ear
 *.zip
 *.tar.gz
 *.rar
+
+# JAR files - but explicitly allow lib/ directory
+*.jar
+!lib/*.jar
 
 # Logs and databases
 *.log
