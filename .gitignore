@@ -21,9 +21,11 @@ out/
 *.tar.gz
 *.rar
 
-# JAR files - but explicitly allow lib/ directory
+# JAR files - dual-branch strategy
 *.jar
-!lib/*.jar
+# In master branch: lib/ JARs are excluded for development flexibility
+# In with-jars branch: uncomment line below to include lib/ JARs for production
+# !lib/*.jar
 
 # Logs and databases
 *.log

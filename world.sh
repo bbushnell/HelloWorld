@@ -6,6 +6,14 @@
 # Standard directory resolution
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Source validation functions
+if [ -f "$DIR/validation.sh" ]; then
+    source "$DIR/validation.sh"
+else
+    echo "❌ Error: validation.sh not found. Required for proper validation."
+    exit 1
+fi
+
 # Usage function
 usage() {
     echo "world.sh - World information generator launcher"
@@ -69,25 +77,18 @@ for arg in "$@"; do
     esac
 done
 
-# Verify Java is available
-if ! command -v java &> /dev/null; then
-    echo "❌ Error: java not found. Please install Java Runtime Environment (JRE)."
-    exit 1
-fi
+# Comprehensive validation
+validate_java_version 8 || exit 1
+validate_compiled_classes "$DIR" "world/WorldTool.class" "hello/HelloUtils.class" || exit 1
 
-# Verify compiled classes exist
-if [ ! -f "$DIR/world/WorldTool.class" ]; then
-    echo "❌ Error: WorldTool.class not found. Please run compile.sh first."
-    echo "   sh compile.sh"
-    exit 1
-fi
-
-# Also verify cross-package dependency
-if [ ! -f "$DIR/hello/HelloUtils.class" ]; then
-    echo "❌ Error: HelloUtils.class not found. WorldTool depends on hello package."
-    echo "   sh compile.sh"
-    exit 1
-fi
+# Validate memory specifications
+for arg in "$@"; do
+    case "$arg" in
+        -Xmx*|-Xms*)
+            validate_memory_spec "$arg" || exit 1
+            ;;
+    esac
+done
 
 # Set classpath
 CLASSPATH="$DIR"

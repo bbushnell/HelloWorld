@@ -3,8 +3,16 @@
 # HelloTool launcher script
 # Laptop-friendly defaults with professional argument handling
 
-# Standard directory resolution  
+# Standard directory resolution
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+# Source validation functions
+if [ -f "$DIR/validation.sh" ]; then
+    source "$DIR/validation.sh"
+else
+    echo "❌ Error: validation.sh not found. Required for proper validation."
+    exit 1
+fi
 
 # Usage function
 usage() {
@@ -74,18 +82,18 @@ for arg in "$@"; do
     esac
 done
 
-# Verify Java is available
-if ! command -v java &> /dev/null; then
-    echo "❌ Error: java not found. Please install Java Runtime Environment (JRE)."
-    exit 1
-fi
+# Comprehensive validation
+validate_java_version 8 || exit 1
+validate_compiled_classes "$DIR" "hello/HelloTool.class" || exit 1
 
-# Verify compiled classes exist
-if [ ! -f "$DIR/hello/HelloTool.class" ]; then
-    echo "❌ Error: HelloTool.class not found. Please run compile.sh first."
-    echo "   sh compile.sh"
-    exit 1
-fi
+# Validate memory specifications
+for arg in "$@"; do
+    case "$arg" in
+        -Xmx*|-Xms*)
+            validate_memory_spec "$arg" || exit 1
+            ;;
+    esac
+done
 
 # Set classpath
 CLASSPATH="$DIR"

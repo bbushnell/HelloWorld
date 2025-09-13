@@ -1,17 +1,24 @@
 #!/bin/bash
 
 # HelloWorld compile script
-# Laptop-friendly compilation with reasonable defaults
+# Professional Java compilation with comprehensive validation
 
 # Standard directory resolution
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# Source validation functions
+if [ -f "$DIR/validation.sh" ]; then
+    source "$DIR/validation.sh"
+else
+    echo "❌ Error: validation.sh not found. Required for proper compilation validation."
+    exit 1
+fi
+
 echo "HelloWorld Compiler v1.0"
 echo "========================"
 
-# Check for Java compiler
-if ! command -v javac &> /dev/null; then
-    echo "❌ Error: javac not found. Please install Java Development Kit (JDK)."
+# Comprehensive environment validation
+if ! validate_helloworld_environment "$DIR"; then
     exit 1
 fi
 
@@ -20,11 +27,11 @@ echo "📁 Project directory: $DIR"
 # Compile all Java files in packages
 echo "🔨 Compiling Java source files..."
 
-# Find and compile all .java files in package directories  
-JAVA_FILES=$(find "$DIR" \( -path "*/hello/*" -o -path "*/world/*" \) -name "*.java")
+# Find and compile all .java files in package directories
+JAVA_FILES=$(find "$DIR" \( -path "*/hello/*" -o -path "*/world/*" -o -path "*/tools/*" \) -name "*.java")
 
 if [ -z "$JAVA_FILES" ]; then
-    echo "❌ No Java source files found in hello/ or world/ packages"
+    echo "❌ No Java source files found in hello/, world/, or tools/ packages"
     exit 1
 fi
 
@@ -45,11 +52,30 @@ if [ $? -eq 0 ]; then
     echo "📁 Class file locations:"
     find "$DIR" -name "*.class" | sed 's/^/  /'
     
+    # Generate API documentation if ApiWriter is available
+    if [ -f "$DIR/tools/ApiWriter.class" ] && [ -f "$DIR/apiwriter.sh" ]; then
+        echo "📄 Generating API documentation..."
+
+        # Generate package APIs
+        if [ -d "$DIR/hello" ] && sh "$DIR/apiwriter.sh" hello/ api/package_hello.api > /dev/null 2>&1; then
+            echo "  ✅ Generated api/package_hello.api"
+        fi
+
+        if [ -d "$DIR/world" ] && sh "$DIR/apiwriter.sh" world/ api/package_world.api > /dev/null 2>&1; then
+            echo "  ✅ Generated api/package_world.api"
+        fi
+
+        if [ -d "$DIR/tools" ] && sh "$DIR/apiwriter.sh" tools/ api/package_tools.api > /dev/null 2>&1; then
+            echo "  ✅ Generated api/package_tools.api"
+        fi
+    fi
+
     echo ""
     echo "🚀 Ready to run tools:"
     echo "  sh hello.sh [name]           - Generate personalized greeting"
     echo "  sh world.sh                  - Display world information"
     echo "  sh run-tests.sh              - Execute test suite"
+    echo "  sh apiwriter.sh <input>      - Generate API documentation"
     echo ""
     
 else
