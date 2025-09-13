@@ -56,15 +56,15 @@ public class WorldUtils {
             info.append("Major languages by speakers:\n");
             for (String language : TOP_LANGUAGES) {
                 assert language != null && !language.isEmpty() : "Language entry must be valid";
-                info.append("  • ").append(language).append("\n");
+                info.append("  * ").append(language).append("\n");
             }
             info.append("\n");
-            
+
             // Continental information
             info.append("Continental distribution:\n");
             for (String continent : CONTINENTS) {
                 assert continent != null && !continent.isEmpty() : "Continent entry must be valid";
-                info.append("  • ").append(continent).append("\n");
+                info.append("  * ").append(continent).append("\n");
             }
             
             String result = info.toString();

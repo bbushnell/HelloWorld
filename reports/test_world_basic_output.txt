@@ -1,25 +1,25 @@
-Hello, World!
+Greetings, World!
 World Information Summary:
 ========================
 
 Population: 8.1 billion people (approximate)
 
 Major languages by speakers:
-  • Mandarin Chinese (918M)
-  • Spanish (460M)
-  • English (379M)
-  • Hindi (341M)
-  • Bengali (228M)
-  • Portuguese (221M)
-  • Russian (154M)
-  • Japanese (128M)
+  * Mandarin Chinese (918M)
+  * Spanish (460M)
+  * English (379M)
+  * Hindi (341M)
+  * Bengali (228M)
+  * Portuguese (221M)
+  * Russian (154M)
+  * Japanese (128M)
 
 Continental distribution:
-  • Asia (30% land, 60% population)
-  • Africa (20% land, 18% population)
-  • North America (16% land, 8% population)
-  • South America (12% land, 6% population)
-  • Antarctica (10% land, 0% population)
-  • Europe (7% land, 10% population)
-  • Australia/Oceania (6% land, 1% population)
+  * Asia (30% land, 60% population)
+  * Africa (20% land, 18% population)
+  * North America (16% land, 8% population)
+  * South America (12% land, 6% population)
+  * Antarctica (10% land, 0% population)
+  * Europe (7% land, 10% population)
+  * Australia/Oceania (6% land, 1% population)
 
