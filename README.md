@@ -252,6 +252,8 @@ HelloWorld demonstrates the base pattern that scales to complex frameworks:
 ## 📖 Documentation
 
 This repository includes complete project organization guides:
+- **DocumentationGuide.md**: Haiku test compliance and documentation excellence standards (PRINCIPLE #11)
+- **Languages.md**: Java-first development policy and technology stack decisions
 - **ProjectGuide.md**: Universal scalable project structure
 - **ShellScriptGuide.md**: Professional shell script patterns
 - **FunctionalityGuide.md**: Systematic functionality investigation
